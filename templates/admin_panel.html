@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+</head>
+<body>
+  <h1>Admin Role Management</h1>
+
+  {% for user in users %}
+    <form method="POST" action="{{ url_for('update_role', user_id=user.id) }}">
+      <p>{{ user.username }} - Current Role: {{ user.role }}</p>
+      <select name="role">
+        {% for role in allowed_roles %}
+          <option value="{{ role }}" {% if user.role == role %}selected{% endif %}>{{ role }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Update Role</button>
+    </form>
+    <hr>
+  {% endfor %}
+</body>
+</html>
+

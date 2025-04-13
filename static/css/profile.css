@@ -1,0 +1,87 @@
+body {
+  font-family: 'Raleway', "Trebuchet MS", sans-serif;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Raleway', "Trebuchet MS", sans-serif;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Cover Photo */
+.cover-photo img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-username {
+  color: black;
+  font-weight: 700;
+}
+
+.profile-username:hover {
+  color: rgba(27, 97, 209, 0.966);
+  cursor: pointer;
+}
+
+/* Profile Picture */
+.profile-picture {
+  position: absolute;
+  top: 220px; /* so it overlaps cover photo */
+  left: 40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid white;
+  overflow: hidden;
+  background-color: white;
+  z-index: 2;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Profile Info */
+.profile-info {
+  margin-top: 100px; /* gives space for the overlapping profile picture */
+  padding: 20px 40px 10px 40px;
+}
+
+.profile-info h2 {
+  margin-bottom: 5px;
+}
+
+.profile-info p {
+  margin-bottom: 10px;
+}
+
+/* Profile Nav */
+.profile-nav {
+  padding: 20px 40px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  gap: 20px;
+}
+
+.profile-nav a {
+  text-decoration: none;
+  color: #1877f2;
+  font-weight: bold;
+}
+
+/* Main Content */
+.profile-content {
+  padding: 20px 40px;
+}

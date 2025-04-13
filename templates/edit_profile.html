@@ -1,0 +1,23 @@
+<!-- profile_edit.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Edit Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        
+        <div>
+            <label for="bio">Bio</label>
+            {{ form.bio(class="form-control") }}
+        </div>
+
+        <div>
+            <label for="profile_picture">Profile Picture</label>
+            {{ form.profile_picture(class="form-control") }}
+        </div>
+
+        <div>
+            <button type="submit">Update Profile</button>
+        </div>
+    </form>
+{% endblock %}

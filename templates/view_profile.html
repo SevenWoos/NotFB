@@ -1,0 +1,51 @@
+<!-- view_profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-container">
+
+    <!-- Cover Photo -->
+    <div class="cover-photo">
+        <img src="{{ url_for('static', filename='cover.jpg') }}" alt="Cover Photo">
+    </div>
+
+    <!-- Profile Picture -->
+    <div class="profile-picture">
+        {% if user.profile_picture %}
+            <img src="{{ url_for('static', filename='profile_pics/' + user.profile_picture) }}" 
+                alt="Profile Picture"
+                style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 4px solid white;" />
+        {% else %}
+            <img src="{{ url_for('static', filename='profile_pics/default.png') }}" 
+                alt="Default Profile Picture" 
+                style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 4px solid white;" />
+        {% endif %}
+    </div>
+
+    <!-- Profile Info -->
+    <div class="profile-info">
+        <h2 class="profile-username">{{ user.username }}</h2>
+        {% if user.bio %}
+            <p>{{ user.bio }}</p>
+        {% endif %}
+        <a href="{{ url_for('profile.edit_profile') }}">Edit Profile</a>
+    </div>
+    
+
+    <!-- Navigation Tabs (optional links for future features) -->
+    <div class="profile-nav">
+        <a href="#">Posts</a>
+        <a href="#">About</a>
+        <a href="#">Friends</a>
+        <a href="#">Photos</a>
+    </div>
+
+    <!-- Placeholder content -->
+    <div class="profile-content">
+        <p>This is where your content will go!</p>
+    </div>
+
+</div>
+{% endblock %}
+
+
