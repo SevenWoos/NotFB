@@ -36,7 +36,7 @@
     <div class="profile-nav">
         <a href="#">Posts</a>
         <a href="#">About</a>
-        <a href="#">Friends</a>
+        <a href="{{ url_for('friends.friends') }}">Friends</a>
         <a href="#">Photos</a>
     </div>
 
@@ -44,6 +44,27 @@
     <div class="profile-content">
         <p>This is where your content will go!</p>
     </div>
+
+    {% if current_user != user %}
+    {% set friendship = user.sent_requests | selectattr('friend_id', 'equalto', current_user.id) | first %}
+    {% if friendship %}
+        {% if friendship.status == 'pending' %}
+            <form action="{{ url_for('friends.accept_friend_request', friendship_id=friendship.id) }}" method="POST">
+                <button type="submit">Accept Friend Request</button>
+            </form>
+            <form action="{{ url_for('friends.reject_friend_request', friendship_id=friendship.id) }}" method="POST">
+                <button type="submit">Reject Friend Request</button>
+            </form>
+        {% elif friendship.status == 'accepted' %}
+            <button disabled>Already Friends</button>
+        {% endif %}
+    {% else %}
+        <form action="{{ url_for('friends.send_friend_request', friend_id=user.id) }}" method="POST">
+            <button type="submit">Send Friend Request</button>
+        </form>
+    {% endif %}
+{% endif %}
+
 
 </div>
 {% endblock %}

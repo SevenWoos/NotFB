@@ -12,13 +12,15 @@
   <title>Dashboard</title>
 </head>
 <body>
-  <h1 class="title-header">Welcome to Not FaceBook!</h1>
-  
-  <p>Username: {{ current_user.username }}</p>
+  {% extends 'base.html' %}
 
-  <!-- 👇 Add this below -->
-  <p>Role: {{ current_user.role }}</p>
+  {% block title %}Dashboard - Not FaceBook{% endblock %}
 
-  <a href="{{url_for('logout')}}">Press here to logout</a>
+  {% block content %}
+    <h1>Welcome to NotFB, {{ current_user.username }}!</h1>
+    <p>Role: {{ current_user.role }}</p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  {% endblock %}
+
 </body>
 </html>

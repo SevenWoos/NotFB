@@ -16,8 +16,18 @@
     <title>NotFB</title>
 </head>
 <body>
+
+    <!-- Navbar -->
+    <nav>
+        <ul>
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('profile.view_profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('friends.friends') }}">Friends</a></li>
+        <li class="nav-right"><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+    </nav>
     <header>
-        <h1 class="title-header">Welcome to NotFB</h1>
+        <!-- <h1 class="title-header">Welcome to NotFB</h1> -->
     </header>
 
     <main>

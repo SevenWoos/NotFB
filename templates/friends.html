@@ -1,0 +1,15 @@
+<!-- templates/friends.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Your Friends</h2>
+<ul>
+  {% for friend in friends %}
+    <li>
+      <a href="{{ url_for('profile', username=friend.username) }}">{{ friend.username }}</a>
+    </li>
+  {% else %}
+    <li>You have no friends yet. 😢</li>
+  {% endfor %}
+</ul>
+{% endblock %}
