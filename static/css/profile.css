@@ -3,6 +3,7 @@ body {
   overflow-y: auto;
 }
 
+
 .profile-container {
   max-width: 900px;
   margin: 0 auto;
@@ -11,7 +12,6 @@ body {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   border-radius: 8px;
-  overflow: hidden;
   position: relative;
   min-height: 100vh;
 }
