@@ -28,8 +28,13 @@
         {% if user.bio %}
             <p>{{ user.bio }}</p>
         {% endif %}
-        <a href="{{ url_for('profile.edit_profile') }}">Edit Profile</a>
+        
+        {% if current_user == user %}
+            <a href="{{ url_for('profile.edit_profile') }}">Edit Profile</a>
+        {% endif %}
+
     </div>
+
     
 
     <!-- Navigation Tabs (optional links for future features) -->
@@ -46,27 +51,41 @@
     </div>
 
     {% if current_user != user %}
-    {% set friendship = user.sent_requests | selectattr('friend_id', 'equalto', current_user.id) | first %}
-    {% if friendship %}
-        {% if friendship.status == 'pending' %}
-            <form action="{{ url_for('friends.accept_friend_request', friendship_id=friendship.id) }}" method="POST">
-                <button type="submit">Accept Friend Request</button>
+    {# Friend request FROM viewed user TO current user (i.e., you received a request) #}
+    {% set incoming = user.sent_requests | selectattr('friend_id', 'equalto', current_user.id) | first %}
+
+    {# Friend request FROM you TO viewed user (i.e., you sent a request) #}
+    {% set sent = current_user.sent_requests | selectattr('friend_id', 'equalto', user.id) | first %}
+
+    {% if incoming %}
+        {% if incoming.status == 'pending' %}
+            <form action="{{ url_for('friends.accept_friend_request', friendship_id=incoming.id) }}" method="POST">
+                <button class="friend-btn accept" type="submit">Accept Friend Request</button>
             </form>
-            <form action="{{ url_for('friends.reject_friend_request', friendship_id=friendship.id) }}" method="POST">
-                <button type="submit">Reject Friend Request</button>
+            <form action="{{ url_for('friends.reject_friend_request', friendship_id=incoming.id) }}" method="POST">
+                <button class="friend-btn reject" type="submit">Reject</button>
             </form>
-        {% elif friendship.status == 'accepted' %}
-            <button disabled>Already Friends</button>
+        {% elif incoming.status == 'accepted' %}
+            <button class="friend-btn accepted" disabled>Already Friends</button>
+        {% endif %}
+    {% elif sent %}
+        {% if sent.status == 'pending' %}
+            <button class="friend-btn sent" disabled>Request Sent</button>
+        {% elif sent.status == 'accepted' %}
+            <button class="friend-btn accepted" disabled>Already Friends</button>
         {% endif %}
     {% else %}
         <form action="{{ url_for('friends.send_friend_request', friend_id=user.id) }}" method="POST">
-            <button type="submit">Send Friend Request</button>
+            <button type="submit" class="friend-btn">Send Friend Request</button>
         </form>
     {% endif %}
 {% endif %}
+
 
 
 </div>
 {% endblock %}
 
 
+<!-- At the bottom of base.html or profile.html before closing </body> tag -->
+<script src="{{ url_for('static', filename='js/request_button_script.js') }}"></script>

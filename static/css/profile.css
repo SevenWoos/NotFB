@@ -85,3 +85,38 @@ body {
 .profile-content {
   padding: 20px 40px;
 }
+
+
+.friend-btn {
+  padding: 10px 18px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+.friend-btn:hover {
+  background-color: #357ABD;
+}
+
+.friend-btn.sent {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.friend-btn.accepted {
+  background-color: #4CAF50;
+  cursor: not-allowed;
+}
+
+.friend-btn.accept {
+  background-color: #4CAF50;
+}
+
+.friend-btn.reject {
+  background-color: #e74c3c;
+}

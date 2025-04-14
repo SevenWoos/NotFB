@@ -21,7 +21,7 @@
     <nav>
         <ul>
         <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-        <li><a href="{{ url_for('profile.view_profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('profile.view_profile', username=current_user.username) }}">Profile</a></li>
         <li><a href="{{ url_for('friends.friends') }}">Friends</a></li>
         <li class="nav-right"><a href="{{ url_for('logout') }}">Logout</a></li>
     </ul>

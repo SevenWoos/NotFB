@@ -48,7 +48,8 @@ def send_friend_request(friend_id):
         db.session.commit()
         flash("Friend request sent!", "Success")
 
-    return redirect(url_for('profile', username=friend.username))  # Redirect to the friend's profile
+    return redirect(url_for('profile.view_profile'
+, username=friend.username))  # Redirect to the friend's profile
 
 
 # Accept a Friend Request
@@ -64,7 +65,8 @@ def accept_friend_request(friendship_id):
     else:
         flash("Invalid friend request.")
 
-    return redirect(url_for('profile', username=current_user.username))
+    return redirect(url_for('profile.view_profile'
+, username=current_user.username))
 
 
 # Delete a Friend Request
@@ -80,4 +82,5 @@ def reject_friend_request(friendship_id):
     else:
         flash("Invalid friend request.")
 
-    return redirect(url_for('profile', username=current_user.username))
+    return redirect(url_for('profile.view_profile'
+, username=current_user.username))

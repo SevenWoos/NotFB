@@ -9,6 +9,13 @@ from models.user import User
 profile_bp = Blueprint('profile', __name__, url_prefix='/profile')
 
 
+# Fallback Route
+@profile_bp.route('/profile')
+@login_required
+def my_profile():
+    return redirect(url_for('profile.view_profile', username=current_user.username))
+
+
 @profile_bp.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -45,7 +52,14 @@ def edit_profile():
     form.bio.data = current_user.bio
     return render_template('edit_profile.html', form=form)
 
-@profile_bp.route('/')
+@profile_bp.route('/<username>', methods=['GET'])
 @login_required
-def view_profile():
-    return render_template('view_profile.html', user=current_user)
+def view_profile(username):
+    # Fetch the user by username
+    user = User.query.filter_by(username=username).first_or_404()
+
+    # Ensure users can only view their own profile or public profiles
+    if not user:
+        abort(404)
+
+    return render_template('view_profile.html', user=user, current_user=current_user)
