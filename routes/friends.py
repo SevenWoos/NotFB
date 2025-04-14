@@ -84,3 +84,13 @@ def reject_friend_request(friendship_id):
 
     return redirect(url_for('profile.view_profile'
 , username=current_user.username))
+
+
+# View Incoming Friend Requests
+@friends_bp.route('/incoming_requests', methods=['GET'])
+@login_required
+def incoming_requests():
+    # Fetch all incoming friend requests for the current user
+    incoming_requests = Friendship.query.filter_by(friend_id=current_user.id, status='pending').all()
+
+    return render_template('incoming_requests.html', requests=incoming_requests)

@@ -6,7 +6,7 @@
 <ul>
   {% for friend in friends %}
     <li>
-      <a href="{{ url_for('profile', username=friend.username) }}">{{ friend.username }}</a>
+      <a href="{{ url_for('profile.view_profile', username=friend.username) }}">{{ friend.username }}</a>
     </li>
   {% else %}
     <li>You have no friends yet. 😢</li>

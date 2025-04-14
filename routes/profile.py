@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, render_template, redirect, url_for, current_app
+from flask import Blueprint, render_template, redirect, url_for, current_app, abort
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 from forms.profile_form import ProfileEditForm
@@ -59,7 +59,9 @@ def view_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
 
     # Ensure users can only view their own profile or public profiles
-    if not user:
-        abort(404)
+    if user != current_user:
+        # Check if the user can view this profile (e.g., if it's public or they are friends)
+        # You can add additional conditions here based on your app logic
+        pass
 
     return render_template('view_profile.html', user=user, current_user=current_user)

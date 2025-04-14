@@ -23,6 +23,8 @@
         <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
         <li><a href="{{ url_for('profile.view_profile', username=current_user.username) }}">Profile</a></li>
         <li><a href="{{ url_for('friends.friends') }}">Friends</a></li>
+        <l1><a href="{{ url_for('friends.incoming_requests') }}">Friend Requests</a>
+        </l1>
         <li class="nav-right"><a href="{{ url_for('logout') }}">Logout</a></li>
     </ul>
     </nav>
