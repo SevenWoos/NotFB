@@ -8,10 +8,116 @@ body{
   /* color: rgb(197, 243, 245); */
   line-height: 1.6;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
 }
 
-.title-header {
-  /* font-family: 'Roboto'; */
+nav {
+  background-color: rgb(236, 237, 229);
+  padding: 10px 20px;
 }
 
+nav ul {
+  display: flex;          /* Use flexbox for layout */
+  justify-content: space-between; /* Spread out items */
+  align-items: center;    /* Vertically center items */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav ul li {
+  margin-right: 20px;     /* Space out the items */
+}
+
+nav ul li a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+}
+
+nav ul li a:hover {
+  color: #007BFF;
+}
+
+/* Use margin-left: auto to push the Logout button to the far right */
+nav ul li.nav-right {
+  margin-left: auto; /* Pushes this item to the far right */
+}
+
+.nav-left a:hover,
+.nav-right a:hover {
+  color: #007BFF;
+}
+
+h1 {
+  text-align: center;
+}
+
+.add-friends-container h2 {
+  text-align: center;
+  margin: 20px;
+}
+
+
+/* Profiles for Mutual Friends */
+.profiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.profile {
+  width: 200px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  margin-right: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.pfp {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  /* border-radius: 50% */
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.mutual-friends {
+  color: rgb(100, 100, 100);
+  margin-bottom: 12px;
+}
+
+.add-friend {
+  background-color: rgb(24, 119, 242);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.add-friend:hover {
+  opacity: 0.8;
+}
+
+.add-friend:active {
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .profile {
+    width: 100%;  /* Stacks the profile cards on small screens */
+    margin-right: 0;
+  }
+}
