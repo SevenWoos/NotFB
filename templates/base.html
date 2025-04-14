@@ -12,6 +12,11 @@
     <!-- <link rel="stylesheet" href="static/css/base.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
+    {% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    {% endblock %}
+
+
 
     <title>NotFB</title>
 </head>

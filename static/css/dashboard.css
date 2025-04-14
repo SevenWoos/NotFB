@@ -1,7 +1,7 @@
 body{
   font-family: 'Raleway', "Trebuchet MS", sans-serif;
   /* background: #333; */
-  /* background-image: linear-gradient(to bottom right, #9e22cb, #1e029a, #dc0cd2, #470c98, #1e029a); */
+  background-image: linear-gradient(to bottom right, #9e22cb, #1e029a, #dc0cd2, #470c98, #1e029a);
     /* Fallback color in case gradient is not supported */
   /* background-color: #1e029a; */
   /* color: #fff; */
@@ -11,9 +11,20 @@ body{
   overflow: auto;
 }
 
+.dashboard-header {
+  color: rgb(197, 243, 245);
+}
+
 nav {
   background-color: rgb(236, 237, 229);
+  background: rgba(0, 0, 0, 0.7); 
   padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 15px 40px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 nav ul {
@@ -30,7 +41,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: black;
+  color: rgb(197, 243, 245);
   text-decoration: none;
   padding: 10px 15px;
   display: block;
@@ -70,6 +81,8 @@ h1 {
 
 .profile {
   width: 200px;
+  /* background-color: rgb(173, 204, 225); */
+  background-color: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   margin-right: 15px;
   margin-bottom: 15px;
