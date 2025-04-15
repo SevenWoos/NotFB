@@ -47,7 +47,8 @@ def edit_profile():
 
 
         db.session.commit()
-        return redirect(url_for('profile.view_profile'))
+        return redirect(url_for('profile.view_profile', username=current_user.username))
+
 
     form.bio.data = current_user.bio
     return render_template('edit_profile.html', form=form)
