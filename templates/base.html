@@ -27,6 +27,9 @@
         <ul>
         <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
         <li><a href="{{ url_for('profile.view_profile', username=current_user.username) }}">Profile</a></li>
+
+        <l1><a href="{{ url_for('profile.inbox') }}">Inbox</a></l1>
+
         <li><a href="{{ url_for('friends.friends') }}">Friends</a></li>
         <l1><a href="{{ url_for('friends.incoming_requests') }}">Friend Requests</a>
         </l1>

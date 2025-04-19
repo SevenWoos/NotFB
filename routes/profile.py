@@ -76,6 +76,16 @@ def send_message(user_id):
     return render_template('view_profile.html', user=recipient, current_user=current_user, form=form)
 
 
+# Inbox Route
+@profile_bp.route('/inbox')
+@login_required
+def inbox():
+    # get all messages for the user
+    received_messages = Message.query.filter_by(receiver_id=current_user.id).all()
+
+    return render_template('inbox.html', messages=received_messages)
+
+
 
 @profile_bp.route('/<username>', methods=['GET'])
 @login_required
