@@ -6,6 +6,9 @@ from forms.profile_form import ProfileEditForm
 from extensions import db
 from models.user import User
 
+from models.message import Message
+from forms.message_form import MessageForm
+
 profile_bp = Blueprint('profile', __name__, url_prefix='/profile')
 
 
@@ -53,6 +56,27 @@ def edit_profile():
     form.bio.data = current_user.bio
     return render_template('edit_profile.html', form=form)
 
+@profile_bp.route('/send_message/<int:user_id>', methods=['POST'])
+@login_required
+def send_message(user_id):
+    form = MessageForm()
+    recipient = User.query.get_or_404(user_id)
+
+    if form.validate_on_submit():
+        message = Message(
+            sender_id=current_user.id,
+            receiver_id=recipient.id,
+            content=form.content.data
+        )
+        db.session.add(message)
+        db.session.commit()
+        return redirect(url_for('profile.view_profile', username=recipient.username))
+
+    # If the form wasn't valid, re-render the recipient's profile with the form errors
+    return render_template('view_profile.html', user=recipient, current_user=current_user, form=form)
+
+
+
 @profile_bp.route('/<username>', methods=['GET'])
 @login_required
 def view_profile(username):
@@ -65,4 +89,7 @@ def view_profile(username):
         # You can add additional conditions here based on your app logic
         pass
 
-    return render_template('view_profile.html', user=user, current_user=current_user)
+    # Message Form Template
+    form = MessageForm()
+
+    return render_template('view_profile.html', user=user, current_user=current_user, form=form)
