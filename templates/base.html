@@ -8,15 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-    <!-- <link rel="stylesheet" href="static/css/base.css"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
     {% block extra_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     {% endblock %}
-
-
 
     <title>NotFB</title>
 </head>
@@ -28,11 +24,14 @@
         <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
         <li><a href="{{ url_for('profile.view_profile', username=current_user.username) }}">Profile</a></li>
 
-        <l1><a href="{{ url_for('profile.inbox') }}">Inbox</a></l1>
+        <li><a href="{{ url_for('profile.inbox') }}">Inbox
+            {% if unread_message_count and unread_message_count > 0 %}
+            <span class="badge bg-danger">{{ unread_message_count }}</span>
+        {% endif %}
+        </a></li>
 
         <li><a href="{{ url_for('friends.friends') }}">Friends</a></li>
-        <l1><a href="{{ url_for('friends.incoming_requests') }}">Friend Requests</a>
-        </l1>
+        <li><a href="{{ url_for('friends.incoming_requests') }}">Friend Requests</a></li>
         <li class="nav-right"><a href="{{ url_for('logout') }}">Logout</a></li>
     </ul>
     </nav>
@@ -47,5 +46,10 @@
     <footer>
         <p>&copy; 2025 NotFB</p>
     </footer>
+
+    <!-- Include scripts block for custom JavaScript -->
+    {% block scripts %}
+    <!-- You can add additional global JavaScript here, if needed -->
+    {% endblock %}
 </body>
 </html>

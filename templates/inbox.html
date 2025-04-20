@@ -5,14 +5,49 @@
     {% if messages %}
         <ul>
             {% for message in messages %}
-                <li>
+                <li id="message-{{ message.id }}">
                     <strong>From: {{ message.sender.username }}</strong><br>
                     <p>{{ message.content }}</p>
                     <small>{{ message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+
+                    <!-- Delete button (form) -->
+                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteMessage({{ message.id }})">Delete</button>
+                    <!-- (ID: {{ message.id }}) -->
                 </li>
+                <hr>
             {% endfor %}
         </ul>
     {% else %}
         <p>You have no messages in your inbox.</p>
     {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Ensure deleteMessage function is defined
+    function deleteMessage(messageId) {
+        console.log(`Deleting message with ID: ${messageId}`);
+        fetch(`/messages/delete_message/${messageId}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                const messageElement = document.getElementById(`message-${messageId}`);
+                if (messageElement) {
+                    messageElement.remove();
+                }
+            } else {
+                alert("Failed to delete message.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong while deleting.");
+        });
+    }
+</script>
 {% endblock %}
